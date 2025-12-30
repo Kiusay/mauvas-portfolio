@@ -1,0 +1,1169 @@
+/* ================================================
+   MAUVAS Portfolio - Base Styles
+   ================================================
+   Layer Structure:
+   - z-index: -1  → Background canvas
+   - z-index: 1   → Content (.app)
+   ================================================ */
+
+/* ================================================
+   Reset & Base
+   ================================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: #050505;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ================================================
+   Layer 1: Background Canvas (Fixed, Behind All)
+   ================================================ */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ================================================
+   Layer 2: Content Container
+   ================================================ */
+.app {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================================================
+   Navbar
+   ================================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    /* Placeholder styling - will be refined later */
+    background: rgba(5, 5, 5, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.navbar-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Logo with Neon Glow Effect - Pulsing Only */
+.logo-neon {
+    height: 50px;
+    width: auto;
+    position: relative;
+    /* Green neon glow */
+    filter:
+        drop-shadow(0 0 5px rgba(0, 255, 102, 0.8)) drop-shadow(0 0 10px rgba(0, 255, 102, 0.6)) drop-shadow(0 0 20px rgba(0, 255, 102, 0.4)) drop-shadow(0 0 40px rgba(0, 255, 102, 0.3));
+    animation: neon-pulse 2s ease-in-out infinite alternate;
+}
+
+/* Neon pulse animation */
+@keyframes neon-pulse {
+    0% {
+        filter:
+            drop-shadow(0 0 5px rgba(0, 255, 102, 0.7)) drop-shadow(0 0 10px rgba(0, 255, 102, 0.5)) drop-shadow(0 0 20px rgba(0, 255, 102, 0.3)) drop-shadow(0 0 40px rgba(0, 255, 102, 0.2));
+    }
+
+    100% {
+        filter:
+            drop-shadow(0 0 8px rgba(0, 255, 102, 1)) drop-shadow(0 0 15px rgba(0, 255, 102, 0.8)) drop-shadow(0 0 30px rgba(0, 255, 102, 0.5)) drop-shadow(0 0 60px rgba(0, 255, 102, 0.4));
+    }
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #00ff66;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: #00ff66;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Language Toggle */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: transparent;
+    border: 2px solid rgba(0, 255, 102, 0.5);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-toggle:hover {
+    border-color: #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+}
+
+.lang-option {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.lang-option.active {
+    color: #00ff66;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+.lang-divider {
+    color: rgba(255, 255, 255, 0.3);
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Mobile menu button (hidden by default) */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-btn span {
+    width: 25px;
+    height: 2px;
+    background: #00ff66;
+    transition: all 0.3s ease;
+}
+
+/* ================================================
+   Main Content
+   ================================================ */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================================================
+   Hero Section
+   ================================================ */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 2rem;
+    /* Top padding accounts for navbar */
+}
+
+.hero-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+/* Hero Content (Left side) */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Hero Name Container - holds all typing lines */
+.hero-name {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.hero-title {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: #00ff66;
+    text-shadow:
+        0 0 10px rgba(0, 255, 102, 0.6),
+        0 0 20px rgba(0, 255, 102, 0.4),
+        0 0 40px rgba(0, 255, 102, 0.2);
+    min-height: 1em;
+    margin: 0;
+}
+
+/* Typing Effect Styles */
+.typing-title {
+    display: inline-block;
+}
+
+.typing-text {
+    display: inline;
+}
+
+.typing-cursor {
+    display: inline-block;
+    color: #00ff66;
+    font-weight: 300;
+    margin-left: 2px;
+    animation: cursor-blink 1s step-end infinite;
+}
+
+.typing-cursor.fade-out {
+    animation: cursor-fade 0.5s ease-out forwards;
+}
+
+@keyframes cursor-blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes cursor-fade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.typing-complete .typing-text {
+    /* Optional: subtle pulse when complete */
+    animation: title-settle 0.3s ease-out;
+}
+
+@keyframes title-settle {
+    0% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.hero-subtitle {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+    color: #ffffff;
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 255, 255, 0.2);
+    min-height: 1em;
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    text-decoration: none;
+    padding: 1.2rem 2rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    /* Outer border with cut corners using clip-path */
+    clip-path: polygon(8px 0%, calc(100% - 8px) 0%,
+            100% 8px, 100% calc(100% - 8px),
+            calc(100% - 8px) 100%, 8px 100%,
+            0% calc(100% - 8px), 0% 8px);
+}
+
+/* Secondary button - outline style with double border effect */
+.btn-secondary {
+    background: transparent;
+    color: #00ff66;
+    border: 4px solid #00ff66;
+    box-shadow:
+        0 0 15px rgba(0, 255, 102, 0.5),
+        0 0 30px rgba(0, 255, 102, 0.3),
+        0 0 45px rgba(0, 255, 102, 0.15),
+        inset 0 0 20px rgba(0, 255, 102, 0.1);
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 255, 102, 0.05);
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 25px rgba(0, 255, 102, 0.6),
+        0 0 50px rgba(0, 255, 102, 0.4),
+        0 0 75px rgba(0, 255, 102, 0.2),
+        inset 0 0 30px rgba(0, 255, 102, 0.15);
+}
+
+/* Primary button - filled style */
+.btn-primary {
+    background: #00ff66;
+    color: #000000;
+    border: 4px solid #00ff66;
+    font-weight: 400;
+    box-shadow:
+        0 0 20px rgba(0, 255, 102, 0.6),
+        0 0 40px rgba(0, 255, 102, 0.4),
+        0 0 60px rgba(0, 255, 102, 0.2);
+}
+
+.btn-primary:hover {
+    background: #33ff88;
+    border-color: #33ff88;
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 30px rgba(0, 255, 102, 0.8),
+        0 0 60px rgba(0, 255, 102, 0.5),
+        0 0 90px rgba(0, 255, 102, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Hero Visual (Right side - Avatar Image) */
+.hero-visual {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Avatar Image with Neon Glow Effect - Optimized */
+.avatar-neon {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    /* Simplified neon glow - only 2 shadows for better performance */
+    filter:
+        drop-shadow(0 0 10px rgba(0, 255, 102, 0.6)) drop-shadow(0 0 30px rgba(0, 255, 102, 0.3));
+    animation: avatar-neon-pulse 3s ease-in-out infinite alternate;
+    will-change: filter;
+    /* GPU acceleration */
+}
+
+/* Avatar neon pulse animation - Optimized */
+@keyframes avatar-neon-pulse {
+    0% {
+        filter:
+            drop-shadow(0 0 8px rgba(0, 255, 102, 0.4)) drop-shadow(0 0 25px rgba(0, 255, 102, 0.2));
+    }
+
+    100% {
+        filter:
+            drop-shadow(0 0 15px rgba(0, 255, 102, 0.8)) drop-shadow(0 0 40px rgba(0, 255, 102, 0.4));
+    }
+}
+
+/* ================================================
+   Skills Section - Interactive Keyboard
+   ================================================ */
+.skills-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    position: relative;
+}
+
+.skills-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Section Title */
+.section-title {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: #00ff66;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow:
+        0 0 10px rgba(0, 255, 102, 0.6),
+        0 0 20px rgba(0, 255, 102, 0.4),
+        0 0 40px rgba(0, 255, 102, 0.2);
+    margin: 0;
+}
+
+/* Side-by-side Layout for Desktop */
+.skills-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 1rem;
+    align-items: start;
+    width: 100%;
+}
+
+.keyboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Info Panel (Screen) */
+.keyboard-screen {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    background: linear-gradient(135deg, rgba(10, 20, 15, 0.95) 0%, rgba(5, 15, 10, 0.98) 100%);
+    border: 3px solid rgba(0, 255, 102, 0.4);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    overflow: hidden;
+    box-shadow:
+        0 0 20px rgba(0, 255, 102, 0.2),
+        inset 0 0 30px rgba(0, 255, 102, 0.05);
+}
+
+/* Scanline effect */
+.screen-scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.1) 2px,
+            rgba(0, 0, 0, 0.1) 4px);
+    opacity: 0.3;
+}
+
+.screen-content {
+    position: relative;
+    z-index: 1;
+}
+
+.screen-title {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    color: #00ff66;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+.screen-category {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 0.75rem 0;
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Category-specific colors */
+.screen-category.cat-frontend {
+    color: #00ff66;
+    background: rgba(0, 255, 102, 0.1);
+}
+
+.screen-category.cat-backend {
+    color: #00ccff;
+    background: rgba(0, 204, 255, 0.1);
+}
+
+.screen-category.cat-database {
+    color: #ff6600;
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.screen-category.cat-devops {
+    color: #cc66ff;
+    background: rgba(204, 102, 255, 0.1);
+}
+
+.screen-description {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+}
+
+.screen-level {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.level-bars {
+    display: flex;
+    gap: 4px;
+}
+
+.level-bar {
+    width: 20px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.level-bar.active {
+    background: #00ff66;
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.6);
+}
+
+.level-years {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.screen-projects {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.projects-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Screen update animation */
+.keyboard-screen.screen-updating .screen-content {
+    opacity: 0.5;
+    transform: translateY(2px);
+}
+
+.screen-content {
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* Keyboard Container */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, rgba(20, 25, 20, 0.9) 0%, rgba(10, 15, 10, 0.95) 100%);
+    border: 2px solid rgba(0, 255, 102, 0.2);
+    border-radius: 12px;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    /* Subtle 3D tilt */
+    transform: perspective(1000px) rotateX(2deg);
+    transform-origin: center bottom;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+/* Individual Keys */
+.keyboard-key {
+    position: relative;
+    min-width: 55px;
+    height: 55px;
+    padding: 0.5rem;
+    background: linear-gradient(180deg, rgba(40, 50, 45, 0.9) 0%, rgba(25, 35, 30, 0.95) 100%);
+    border: 2px solid rgba(0, 255, 102, 0.25);
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+    box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.4),
+        0 6px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.key-label {
+    font-family: 'Press Start 2P', 'Courier New', monospace;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+/* Level dots on keys */
+.key-level {
+    display: flex;
+    gap: 2px;
+}
+
+.level-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.level-dot.active {
+    background: #00ff66;
+    box-shadow: 0 0 4px rgba(0, 255, 102, 0.6);
+}
+
+/* Key Hover State */
+.keyboard-key:hover,
+.keyboard-key.key-hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 255, 102, 0.6);
+    box-shadow:
+        0 8px 0 rgba(0, 0, 0, 0.3),
+        0 12px 20px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 255, 102, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.keyboard-key:hover .key-label,
+.keyboard-key.key-hover .key-label {
+    color: #00ff66;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+/* Key Selected State */
+.keyboard-key.key-selected {
+    transform: translateY(-2px);
+    background: linear-gradient(180deg, rgba(0, 255, 102, 0.2) 0%, rgba(0, 200, 80, 0.15) 100%);
+    border-color: #00ff66;
+    box-shadow:
+        0 4px 0 rgba(0, 100, 50, 0.5),
+        0 6px 15px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(0, 255, 102, 0.4),
+        inset 0 0 15px rgba(0, 255, 102, 0.1);
+}
+
+.keyboard-key.key-selected .key-label {
+    color: #00ff66;
+    text-shadow: 0 0 15px rgba(0, 255, 102, 0.8);
+}
+
+/* Key Active (pressed) State */
+.keyboard-key:active {
+    transform: translateY(0);
+    box-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.4),
+        0 2px 5px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Key Filtered (dimmed) State */
+.keyboard-key.key-filtered {
+    opacity: 0.3;
+    transform: scale(0.95);
+    pointer-events: none;
+}
+
+/* Category-specific key colors */
+.keyboard-key.key-cat-frontend:hover,
+.keyboard-key.key-cat-frontend.key-selected {
+    border-color: #00ff66;
+    box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 255, 102, 0.4);
+}
+
+.keyboard-key.key-cat-backend:hover,
+.keyboard-key.key-cat-backend.key-selected {
+    border-color: #00ccff;
+    box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 204, 255, 0.4);
+}
+
+.keyboard-key.key-cat-backend:hover .key-label,
+.keyboard-key.key-cat-backend.key-selected .key-label {
+    color: #00ccff;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+}
+
+.keyboard-key.key-cat-database:hover,
+.keyboard-key.key-cat-database.key-selected {
+    border-color: #ff6600;
+    box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(255, 102, 0, 0.4);
+}
+
+.keyboard-key.key-cat-database:hover .key-label,
+.keyboard-key.key-cat-database.key-selected .key-label {
+    color: #ff6600;
+    text-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+}
+
+.keyboard-key.key-cat-devops:hover,
+.keyboard-key.key-cat-devops.key-selected {
+    border-color: #cc66ff;
+    box-shadow:
+        0 4px 0 rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(204, 102, 255, 0.4);
+}
+
+.keyboard-key.key-cat-devops:hover .key-label,
+.keyboard-key.key-cat-devops.key-selected .key-label {
+    color: #cc66ff;
+    text-shadow: 0 0 10px rgba(204, 102, 255, 0.5);
+}
+
+/* Special Keys */
+.keyboard-key.key-special {
+    background: linear-gradient(180deg, rgba(60, 70, 65, 0.9) 0%, rgba(40, 50, 45, 0.95) 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.keyboard-key.key-special:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 8px 0 rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.keyboard-key.key-special .key-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.keyboard-key.key-special:hover .key-label {
+    color: #ffffff;
+}
+
+/* Key Icons */
+.key-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    /* Make black SVGs white using brightness/contrast instead of invert */
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(105%) contrast(100%);
+    transition: all 0.2s ease;
+}
+
+.keyboard-key:hover .key-icon,
+.keyboard-key.key-selected .key-icon {
+    /* Brighter white on hover with subtle glow */
+    filter: brightness(0) saturate(100%) invert(100%) sepia(10%) saturate(500%) hue-rotate(0deg) brightness(115%) contrast(100%) drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+/* Category-specific icon glow with colors */
+.keyboard-key.key-cat-frontend:hover .key-icon,
+.keyboard-key.key-cat-frontend.key-selected .key-icon {
+    filter: brightness(0) saturate(100%) invert(72%) sepia(89%) saturate(471%) hue-rotate(85deg) brightness(105%) contrast(101%) drop-shadow(0 0 8px rgba(0, 255, 102, 1));
+}
+
+.keyboard-key.key-cat-backend:hover .key-icon,
+.keyboard-key.key-cat-backend.key-selected .key-icon {
+    filter: brightness(0) saturate(100%) invert(67%) sepia(100%) saturate(597%) hue-rotate(154deg) brightness(103%) contrast(101%) drop-shadow(0 0 8px rgba(0, 204, 255, 1));
+}
+
+.keyboard-key.key-cat-database:hover .key-icon,
+.keyboard-key.key-cat-database.key-selected .key-icon {
+    filter: brightness(0) saturate(100%) invert(52%) sepia(98%) saturate(2932%) hue-rotate(1deg) brightness(102%) contrast(106%) drop-shadow(0 0 8px rgba(255, 102, 0, 1));
+}
+
+.keyboard-key.key-cat-devops:hover .key-icon,
+.keyboard-key.key-cat-devops.key-selected .key-icon {
+    filter: brightness(0) saturate(100%) invert(63%) sepia(55%) saturate(1711%) hue-rotate(230deg) brightness(101%) contrast(101%) drop-shadow(0 0 8px rgba(204, 102, 255, 1));
+}
+
+/* Key Sizes - Realistic QWERTY Layout */
+.keyboard-key.key-normal {
+    min-width: 50px;
+}
+
+.keyboard-key.key-wide {
+    min-width: 85px;
+}
+
+.keyboard-key.key-tab {
+    min-width: 75px;
+}
+
+.keyboard-key.key-caps {
+    min-width: 90px;
+}
+
+.keyboard-key.key-shift {
+    min-width: 110px;
+}
+
+.keyboard-key.key-enter {
+    min-width: 100px;
+}
+
+.keyboard-key.key-space {
+    min-width: 280px;
+}
+
+.keyboard-key.key-ctrl {
+    min-width: 70px;
+}
+
+.keyboard-key.key-alt {
+    min-width: 60px;
+}
+
+/* Category Filters */
+.keyboard-filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.filter-btn {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.filter-btn.active {
+    color: var(--filter-color, #00ff66);
+    border-color: var(--filter-color, #00ff66);
+    background: rgba(0, 255, 102, 0.1);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+}
+
+/* ================================================
+   Responsive
+   ================================================ */
+@media (max-width: 900px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content {
+        align-items: center;
+    }
+
+    .hero-visual {
+        order: -1;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    /* Navbar responsive */
+    .navbar-nav {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    /* Skills layout - stack on tablet */
+    .skills-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .keyboard-screen {
+        max-width: 100%;
+    }
+
+    /* Keyboard responsive */
+    .keyboard {
+        transform: none;
+        padding: 1rem;
+    }
+
+    .keyboard-key {
+        min-width: 42px;
+        height: 45px;
+    }
+
+    .key-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .key-label {
+        font-size: 0.5rem;
+    }
+
+    .keyboard-key.key-wide {
+        min-width: 80px;
+    }
+
+    .keyboard-key.key-extrawide {
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(5, 5, 5, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: all 0.4s ease;
+        border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+    }
+
+    .navbar-nav.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .navbar-container {
+        gap: 1rem;
+    }
+
+    /* Skills section mobile */
+    .skills-section {
+        padding: 3rem 1rem;
+    }
+
+    .keyboard-screen {
+        padding: 1rem;
+    }
+
+    .screen-title {
+        font-size: 0.8rem;
+    }
+
+    .screen-description {
+        font-size: 1rem;
+    }
+
+    .keyboard-row {
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .keyboard-key {
+        min-width: 38px;
+        height: 42px;
+    }
+
+    .key-label {
+        font-size: 0.45rem;
+    }
+
+    .keyboard-key.key-wide {
+        min-width: 70px;
+    }
+
+    .keyboard-key.key-extrawide {
+        min-width: 120px;
+    }
+
+    .key-level {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .hero {
+        padding: 5rem 1rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .logo-neon {
+        height: 35px;
+    }
+
+    .lang-toggle {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .lang-option {
+        font-size: 0.8rem;
+    }
+
+    /* Keyboard extra small */
+    .keyboard {
+        padding: 0.75rem;
+        gap: 5px;
+    }
+
+    .keyboard-row {
+        gap: 3px;
+    }
+
+    .keyboard-key {
+        min-width: 32px;
+        height: 36px;
+        padding: 0.25rem;
+        border-width: 1px;
+    }
+
+    .key-label {
+        font-size: 0.4rem;
+    }
+
+    .keyboard-key.key-wide {
+        min-width: 60px;
+    }
+
+    .keyboard-key.key-extrawide {
+        min-width: 100px;
+    }
+
+    .filter-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+}
