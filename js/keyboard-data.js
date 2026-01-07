@@ -235,12 +235,13 @@ const KEYBOARD_DATA = {
             projects: ['All Projects']
         },
         'BACKSPACE': {
-            label: '⌫',
+            label: 'Borrar',
             fullName: { es: 'Borrar', en: 'Backspace' },
             category: 'special',
             isSpecial: true,
             size: 'wide',
             action: 'reset',
+            icon: './assets/icons/clear.svg',
             description: {
                 es: 'Limpiar selección actual',
                 en: 'Clear current selection'

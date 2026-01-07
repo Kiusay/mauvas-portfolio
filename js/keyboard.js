@@ -83,7 +83,7 @@ class InteractiveKeyboard {
         key.classList.add(`key-cat-${keyData.category}`);
 
         // Key content - use icon if available, otherwise text
-        if (keyData.icon && !keyData.isSpecial) {
+        if (keyData.icon) {
             const iconImg = document.createElement('img');
             iconImg.className = 'key-icon';
             iconImg.src = keyData.icon;
