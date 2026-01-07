@@ -968,7 +968,6 @@ body {
    ================================================ */
 .services-section {
     padding: 6rem 2rem;
-    background: linear-gradient(180deg, rgba(5, 10, 5, 0.95) 0%, rgba(10, 15, 10, 0.98) 100%);
 }
 
 .services-container {
@@ -1193,6 +1192,138 @@ body {
     margin-bottom: 1.5rem;
     color: #00ff66;
     filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.8));
+}
+
+/* ================================================
+   Labs Section
+   ================================================ */
+.labs-section {
+    padding: 6rem 2rem;
+}
+
+.labs-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* Lab Card */
+.lab-card {
+    position: relative;
+    aspect-ratio: 1;
+    background: rgba(10, 20, 15, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lab-card:hover {
+    transform: scale(1.05);
+    border-color: var(--lab-color);
+    box-shadow:
+        0 0 20px var(--lab-color),
+        0 0 40px rgba(var(--lab-color-rgb, 0, 255, 102), 0.3);
+}
+
+/* Lab Canvas */
+.lab-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lab-card:hover .lab-canvas {
+    opacity: 1;
+}
+
+/* Lab Overlay */
+.lab-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.85);
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.lab-card:hover .lab-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Lab Icon */
+.lab-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 8px var(--lab-color));
+}
+
+.lab-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.lab-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--lab-color);
+    margin-bottom: 0.3rem;
+    text-align: center;
+    text-shadow: 0 0 10px var(--lab-color);
+}
+
+.lab-desc {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+/* Responsive Labs Grid */
+@media (max-width: 1200px) {
+    .labs-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .labs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .labs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lab-card {
+        max-width: 400px;
+        margin: 0 auto;
+    }
 }
 
 /* ================================================
