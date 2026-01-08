@@ -1323,6 +1323,8 @@ body {
     }
 
     .lab-card {
+        width: 100%;
+        /* CRITICAL: Prevents collapse to 2x2px */
         max-width: 400px;
         margin: 0 auto;
     }
