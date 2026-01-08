@@ -1246,7 +1246,8 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.lab-card:hover .lab-canvas {
+.lab-card:hover .lab-canvas,
+.lab-card.active .lab-canvas {
     opacity: 1;
 }
 
@@ -1267,7 +1268,8 @@ body {
     z-index: 1;
 }
 
-.lab-card:hover .lab-overlay {
+.lab-card:hover .lab-overlay,
+.lab-card.active .lab-overlay {
     opacity: 0;
     pointer-events: none;
 }

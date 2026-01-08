@@ -29,9 +29,31 @@ class LabsManager {
                     instance: null
                 });
 
-                // Add hover listeners
-                card.addEventListener('mouseenter', () => this.activateLab(labType));
-                card.addEventListener('mouseleave', () => this.deactivateLab(labType));
+                // Detect if device supports touch
+                const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+                if (isTouchDevice) {
+                    // Mobile: toggle activation on click/touch
+                    card.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const lab = this.labs.get(labType);
+                        if (lab.isActive) {
+                            this.deactivateLab(labType);
+                        } else {
+                            // Deactivate any other active lab first
+                            this.labs.forEach((otherLab, otherType) => {
+                                if (otherLab.isActive && otherType !== labType) {
+                                    this.deactivateLab(otherType);
+                                }
+                            });
+                            this.activateLab(labType);
+                        }
+                    });
+                } else {
+                    // Desktop: use hover events
+                    card.addEventListener('mouseenter', () => this.activateLab(labType));
+                    card.addEventListener('mouseleave', () => this.deactivateLab(labType));
+                }
             }
         });
 
@@ -59,6 +81,7 @@ class LabsManager {
         if (!lab) return;
 
         lab.isActive = true;
+        lab.card.classList.add('active'); // Add active class for mobile CSS
 
         // Initialize lab if not already done
         if (!lab.instance) {
@@ -81,6 +104,7 @@ class LabsManager {
         if (!lab) return;
 
         lab.isActive = false;
+        lab.card.classList.remove('active'); // Remove active class
 
         // Stop animation
         if (lab.instance && lab.instance.stop) {

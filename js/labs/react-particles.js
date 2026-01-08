@@ -24,7 +24,7 @@ class ReactParticlesLab {
                 y: Math.random() * this.canvas.height,
                 vx: (Math.random() - 0.5) * 2,
                 vy: (Math.random() - 0.5) * 2,
-                radius: Math.random() * 4 + 4 // Increased from 3+2 to 4+4
+                radius: Math.random() * 12 + 12 // Tripled: 12-24px
             });
         }
     }
