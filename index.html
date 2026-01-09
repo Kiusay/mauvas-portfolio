@@ -287,10 +287,10 @@
                   de Bases de Datos</span>
               </div>
             </div>
-          <!-- Sticky hide button (appears when additional services visible on mobile) -->
-          <button class="sticky-hide-btn" onclick="closeAdditionalServices()">
-            − Ocultar servicios adicionales
-          </button>
+            <!-- Sticky hide button (appears when additional services visible on mobile) -->
+            <button class="sticky-hide-btn" onclick="closeAdditionalServices()">
+              − Ocultar servicios adicionales
+            </button>
 
 
           </div>
@@ -547,6 +547,24 @@
           </div>
         </div>
       </section>
+
+      <!-- Lab Modal (Mobile) -->
+      <div id="lab-modal" class="lab-modal">
+        <div class="lab-modal-backdrop"></div>
+        <div class="lab-modal-content">
+          <button class="lab-modal-close" aria-label="Close lab">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+          <div class="lab-modal-header">
+            <h3 class="lab-modal-title"></h3>
+          </div>
+          <div class="lab-modal-body">
+            <canvas id="lab-modal-canvas"></canvas>
+          </div>
+        </div>
+      </div>
 
       <!-- DEMOS SECTION -->
       <section id="demos" class="demos-section">

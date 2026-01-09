@@ -12,6 +12,13 @@ class LabsManager {
         // Get all lab cards
         const labCards = document.querySelectorAll('.lab-card');
 
+        // Get modal elements
+        this.modal = document.getElementById('lab-modal');
+        this.modalCanvas = document.getElementById('lab-modal-canvas');
+        this.modalTitle = document.querySelector('.lab-modal-title');
+        this.modalClose = document.querySelector('.lab-modal-close');
+        this.modalBackdrop = document.querySelector('.lab-modal-backdrop');
+
         labCards.forEach(card => {
             const labType = card.dataset.lab;
             const canvas = card.querySelector('.lab-canvas');
@@ -29,33 +36,31 @@ class LabsManager {
                     instance: null
                 });
 
-                // Detect if device supports touch
+                // Detect if device supports touch or is mobile width
+                const isMobile = window.innerWidth <= 768;
                 const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
-                if (isTouchDevice) {
-                    // Mobile: toggle activation on click/touch
+                if (isMobile || isTouchDevice) {
+                    // Mobile: open modal on click
                     card.addEventListener('click', (e) => {
                         e.preventDefault();
-                        const lab = this.labs.get(labType);
-                        if (lab.isActive) {
-                            this.deactivateLab(labType);
-                        } else {
-                            // Deactivate any other active lab first
-                            this.labs.forEach((otherLab, otherType) => {
-                                if (otherLab.isActive && otherType !== labType) {
-                                    this.deactivateLab(otherType);
-                                }
-                            });
-                            this.activateLab(labType);
-                        }
+                        this.openModal(labType);
                     });
                 } else {
-                    // Desktop: use hover events
+                    // Desktop: use hover events on card
                     card.addEventListener('mouseenter', () => this.activateLab(labType));
                     card.addEventListener('mouseleave', () => this.deactivateLab(labType));
                 }
             }
         });
+
+        // Modal close handlers
+        if (this.modalClose) {
+            this.modalClose.addEventListener('click', () => this.closeModal());
+        }
+        if (this.modalBackdrop) {
+            this.modalBackdrop.addEventListener('click', () => this.closeModal());
+        }
 
         // Handle window resize
         window.addEventListener('resize', () => this.handleResize());
@@ -146,6 +151,81 @@ class LabsManager {
                 console.warn(`Unknown lab type: ${labType}`);
                 return null;
         }
+    }
+
+    openModal(labType) {
+        if (!this.modal || !this.modalCanvas) return;
+
+        // Get lab data
+        const lab = this.labs.get(labType);
+        if (!lab) return;
+
+        // Set title
+        const labTitles = {
+            'react': 'React',
+            'vue': 'Vue.js',
+            'svelte': 'Svelte',
+            'threejs': 'Three.js',
+            'webgl': 'WebGL',
+            'p5js': 'P5.js',
+            'gsap': 'GSAP',
+            'animejs': 'Anime.js',
+            'framer': 'Framer Motion',
+            'canvas': 'Canvas API',
+            'particles': 'Particles.js',
+            'd3js': 'D3.js'
+        };
+
+        if (this.modalTitle) {
+            this.modalTitle.textContent = labTitles[labType] || labType;
+        }
+
+        // Resize modal canvas
+        this.resizeCanvas(this.modalCanvas);
+
+        // Create modal context
+        const modalCtx = this.modalCanvas.getContext('2d');
+
+        // Create lab instance for modal
+        try {
+            this.currentModalLab = {
+                type: labType,
+                instance: this.createLabInstance(labType, this.modalCanvas, modalCtx)
+            };
+
+            // Start animation in modal
+            if (this.currentModalLab.instance && this.currentModalLab.instance.start) {
+                this.currentModalLab.instance.start();
+            }
+        } catch (error) {
+            console.error(`Error creating modal lab ${labType}:`, error);
+            return;
+        }
+
+        // Show modal
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+    }
+
+    closeModal() {
+        if (!this.modal) return;
+
+        // Stop and cleanup current lab
+        if (this.currentModalLab) {
+            if (this.currentModalLab.instance && this.currentModalLab.instance.stop) {
+                this.currentModalLab.instance.stop();
+            }
+
+            // Clear canvas
+            const ctx = this.modalCanvas.getContext('2d');
+            ctx.clearRect(0, 0, this.modalCanvas.width, this.modalCanvas.height);
+
+            this.currentModalLab = null;
+        }
+
+        // Hide modal
+        this.modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scroll
     }
 }
 
