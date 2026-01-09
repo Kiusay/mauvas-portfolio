@@ -1,0 +1,299 @@
+/* ========================================
+   MOBILE IMPROVEMENTS - CLEAN REDESIGN
+   ======================================== */
+
+/* ========================================
+   SERVICES SECTION - MOBILE IMPROVEMENTS
+   ======================================== */
+
+/* Desktop - details always visible, buttons hidden */
+.service-toggle-btn {
+    display: none;
+}
+
+.service-features {
+    display: block;
+}
+
+/* Mobile - Collapsible service details */
+@media (max-width: 768px) {
+    .service-card {
+        position: relative;
+    }
+
+    .service-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 0.75rem;
+        margin: 1rem 0;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        color: white;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .service-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .toggle-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .service-card .hide-text {
+        display: none;
+    }
+
+    .service-card.expanded .show-text {
+        display: none;
+    }
+
+    .service-card.expanded .hide-text {
+        display: inline;
+    }
+
+    /* Collapsible features */
+    .service-features {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+        margin: 0;
+    }
+
+    .service-card.expanded .service-features {
+        max-height: 500px;
+        margin: 1rem 0;
+    }
+}
+
+/* Additional Services Toggle */
+.additional-services-toggle {
+    display: none;
+}
+
+.sticky-hide-btn {
+    display: none;
+}
+
+.additional-services-wrapper {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .additional-services-toggle {
+        display: block;
+        width: 100%;
+        padding: 1.25rem 2rem;
+        margin: 2rem 0;
+        background: linear-gradient(135deg, #00ff66, #00D9FF);
+        border: none;
+        border-radius: 50px;
+        color: #0a0a0a;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+    }
+
+    .additional-services-toggle:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 40px rgba(0, 217, 255, 0.4);
+    }
+
+    .additional-services-toggle .hide-text {
+        display: none;
+    }
+
+    .additional-services-wrapper.visible~.additional-services-toggle .show-text {
+        display: none;
+    }
+
+    .additional-services-wrapper.visible~.additional-services-toggle .hide-text {
+        display: inline;
+    }
+
+    /* Additional services hidden by default on mobile */
+    .additional-services-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+
+    .additional-services-wrapper.visible {
+        max-height: 10000px;
+    }
+
+    /* Sticky hide button */
+    .sticky-hide-btn {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #ff6b35, #ff3b00);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .additional-services-wrapper.visible~.sticky-hide-btn {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .sticky-hide-btn:hover {
+        transform: translateX(-50%) translateY(-2px);
+        box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+    }
+}
+
+/* ========================================
+   MOBILE SKILLS SECTION - SCALED KEYBOARD LAYOUT
+   ======================================== */
+
+@media (max-width: 768px) {
+    .skills-section {
+        padding: 3rem 1rem;
+    }
+
+    /* Stack layout: info on top, keyboard below */
+    .skills-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Info screen takes natural height */
+    .keyboard-screen {
+        width: 100%;
+        min-height: auto;
+    }
+
+    /* Keyboard wrapper - centered container */
+    .keyboard-wrapper {
+        width: 100%;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start !important;
+        overflow: hidden !important;
+        gap: 1rem;
+    }
+
+    /* Keyboard - force desktop structure with scaling */
+    .keyboard {
+        width: 850px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        transform-origin: top center !important;
+        transform: scale(0.45) !important;
+        margin-bottom: -275px !important;
+        /* Compensate for scale empty space */
+    }
+
+    /* CRITICAL: Force rows to not wrap */
+    .keyboard-row {
+        flex-wrap: nowrap !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    /* Filters wrap */
+    .keyboard-filters {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 0.5rem;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .filter-btn {
+        flex: 0 0 auto;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+/* Responsive scaling for different widths */
+@media (max-width: 500px) {
+    .keyboard {
+        transform: scale(0.42) !important;
+        margin-bottom: -295px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .keyboard {
+        transform: scale(0.38) !important;
+        margin-bottom: -320px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .keyboard {
+        transform: scale(0.34) !important;
+        margin-bottom: -345px !important;
+    }
+}
+
+/* ========================================
+   HORIZONTAL SERVICE CARDS ON MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .service-card {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .service-card .service-icon {
+        width: 60px !important;
+        height: 60px !important;
+        margin: 0 1rem 0 0 !important;
+        flex-shrink: 0;
+    }
+
+    .service-card .service-title {
+        flex: 1;
+        margin: 0.5rem 0 0 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Buttons on same row */
+    .service-card .service-cta,
+    .service-card .service-toggle-btn {
+        width: auto !important;
+        flex: 1;
+        margin: 1rem 0.25rem !important;
+    }
+
+    .service-card .service-cta:first-of-type {
+        margin-left: 0 !important;
+    }
+
+    .service-card .service-toggle-btn {
+        margin-right: 0 !important;
+    }
+
+    /* Features take full width */
+    .service-card .service-features {
+        width: 100%;
+        flex-basis: 100%;
+    }
+}
