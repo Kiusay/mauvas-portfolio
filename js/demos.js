@@ -142,3 +142,45 @@ function nexusViewCards() {
 function nexusMoreOptions() {
     alert('More Options - In production this would show additional features');
 }
+
+// Chart Drawing for NEXUS
+function drawNexusChart() {
+    const canvas = document.getElementById('nexus-chart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 100;
+    
+    const data = [842, 625, 318, 215];
+    const colors = ['#8b5cf6', '#6366f1', '#3b82f6', '#06b6d4'];
+    const total = data.reduce((a, b) => a + b, 0);
+    
+    let currentAngle = -Math.PI / 2;
+    
+    data.forEach((value, index) => {
+        const sliceAngle = (value / total) * 2 * Math.PI;
+        
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+        ctx.lineTo(centerX, centerY);
+        ctx.fillStyle = colors[index];
+        ctx.fill();
+        
+        currentAngle += sliceAngle;
+    });
+    
+    // Donut hole
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.6, 0, 2 * Math.PI);
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fill();
+}
+
+// Enhance initNexusDemo
+const originalInit = window.initNexusDemo;
+window.initNexusDemo = function() {
+    if (originalInit) originalInit();
+    setTimeout(drawNexusChart, 100);
+};

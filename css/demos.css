@@ -279,3 +279,320 @@
         padding: 1.5rem;
     }
 }
+/* ========================================
+   DEMO MODALS SYSTEM
+   ======================================== */
+
+.demo-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.demo-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.demo-modal-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.demo-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.demo-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+/* NEXUS FINTECH DEMO */
+.nexus-theme {
+    background: #0a0a0a;
+    color: white;
+    font-family: 'Inter', 'Rajdhani', sans-serif;
+}
+
+.nexus-header {
+    padding: 1.5rem 2rem;
+    background: rgba(10, 10, 10, 0.8);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.nexus-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nexus-logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+.nexus-nav-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.nexus-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.nexus-tab.active {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+    color: white;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.nexus-notification {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.nexus-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #0a0a0a;
+}
+
+.nexus-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.nexus-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nexus-main {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nexus-screen {
+    display: none;
+}
+
+.nexus-screen.active {
+    display: block;
+}
+
+.nexus-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+}
+
+.nexus-balance-card {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.nexus-balance-amount {
+    font-size: 3rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.nexus-quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.nexus-action-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nexus-action-btn:hover {
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateY(-4px);
+}
+
+.nexus-action-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nexus-action-icon.send { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.nexus-action-icon.request { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+.nexus-action-icon.cards { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+.nexus-action-icon.more { background: linear-gradient(135deg, #6366f1, #3b82f6); }
+
+.nexus-transactions-list {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nexus-transaction {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+}
+
+.nexus-transaction-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nexus-transaction-info {
+    flex: 1;
+}
+
+.nexus-transaction-name {
+    font-weight: 500;
+}
+
+.nexus-transaction-date {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.nexus-transaction-amount.positive { color: #22c55e; }
+.nexus-transaction-amount.negative { color: rgba(255, 255, 255, 0.9); }
+
+.nexus-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.nexus-virtual-card {
+    max-width: 400px;
+    aspect-ratio: 1.586;
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+}
+
+.nexus-coming-soon {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.demo-placeholder {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .nexus-grid {
+        grid-template-columns: 1fr;
+    }
+}
